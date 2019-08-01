@@ -11,10 +11,15 @@ header{
   background-position: center;
 }
 
+.profImage{
+  position: absolute;
+  right: 0px;
+}
 .main-nav{
+  position: relative;
   float: right;
-  list-style: none;
   margin: 20px;
+  list-style: none;
 }
 
 .main-nav li{
@@ -64,15 +69,29 @@ body{
   position: absolute;
   height: auto;
   margin-left: 30px;
-  margin-right: 0px;
-  margin-top: 150px;
+  margin-top: 10%;
+  align-items: left;
+}
+
+.interest{
+  display: flex;
+}
+
+.options{
+  flex: 1;
+  box-sizing: border-box;
+  background-color: #425A72;
+  margin-left: 15px;
+  border-radius: 5px;
+  transition: 0.5s;
+  text-align: center;
 }
 
 h1{
   color: white;
   text-transform: uppercase;
   font-size: 70px;
-  text-align: center;
+  text-align: left;
 }
 
 h3{
@@ -84,7 +103,8 @@ h3{
 h4{
   color: white;
   font-size: 15px;
-  text-align: right;
+  text-align: left;
+  margin-left: 150px;
 }
 
 /*

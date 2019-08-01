@@ -8,7 +8,7 @@
 
 <body>
   <header>
-
+    <img class="profImage" src="images/profileimg.jpg" style="height:100%">
     <div class="row">
       <div class="logo">
         <img src="images/namelogo.png">
@@ -19,15 +19,49 @@
         <li><a href=""> My Works </a></li>
       </ul>
     </div>
-
     <div class="whoami">
       <h1>Hi I am Joey</h1>
-      <h3>Born December 23, 1998</h3>
       <h3>Student at Purdue University</h3>
       <h4>Bachelor of Science in Computer Science</h4>
+      <h3>Completed 2nd year</h3>
+      <h3>Currently serving Korean military</h3>
+      <div class="parent interest">
+        <h3 class="child text">Interested in</h3>
+        <h3 class="child options" id="interestNames"></h3>
+      </div>
+
     </div>
 
+
   </header>
+  <script>
+
+    window.onload = startAnimation();
+
+    var interests = [
+      "Machine Learning",
+      "Android Dev.",
+      "Web Dev."
+    ];
+
+    var length = interests.length;
+
+    var topics = document.getElementById("interestNames");
+    topics.innerHTML = interests[0];
+
+    var count = 1;
+    function startAnimation(){
+      var interval = setInterval(function(){
+        topics.innerHTML = interests[count];
+        count++;
+        if (count % length == 0) {
+          count = 0;
+        }
+      }, 1000);
+    }
+
+
+  </script>
 
 
 
