@@ -86,35 +86,6 @@ body{
   text-align: center;
   margin-left: 15px;
   border-radius: 5px;
-  transition: 0.5s;
-  transform-style: preserve-3d;
-  transition: all 1s ease;
-}
-
-.options:hover{
-  transform: rotateX(180deg);
-}
-.thefront{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #425A72;
-  text-align: center;
-  color: white;
-  font-size: 30px;
-  backface-visibility: hidden;
-}
-
-.theback{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #425A72;
-  text-align: center;
-  color: white;
-  font-size: 30px;
-  backface-visibility: hidden;
-  transform: rotateX(180deg);
 }
 
 h1{
@@ -137,33 +108,16 @@ h4{
   margin-left: 150px;
 }
 
-/*
-.button{
-  margin-top: 30px;
-  margin-left: 440px;
+.gridlayout{
+  margin-top: 10%;
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 50px;
+  grid-row-gap: 50px;
 }
 
-.btn{
-  border: 1px solid white;
-  padding: 10px 30px;
-  color: white;
-  text-decoration: none;
-  pargin-right: 5px;
-  font-size: 13px;
-  text-transform: uppercase;
+.griditem{
+  border-style: solid;
+  border: 10px;
+  border-color: black;
 }
-
-.btn-one{
-  background-color: darkorange;
-  font-family: "Roboto", sans-serif;
-}
-
-.btn-two{
-  font-family: "Roboto", sans-serif;
-}
-
-.btn-two:hover
-{
-  background-color: darkorange;
-  transition: all 0.5s ease-in;
-} */
