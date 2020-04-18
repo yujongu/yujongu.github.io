@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jong-U's Website</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+  <header>
+    <div class="row">
+      <div class="logo">
+        <img src="images/namelogo.png" alt="Cool Background Image">
+      </div>
+      <ul class="main-nav">
+        <li><a href="index.html"> Home </a></li>
+        <li><a href="aboutMe.html"> About me </a></li>
+        <li class="current"><a href="myTimeTimer.html"> My TimeTimer </a></li>
+        <li><a href="compareWeight.html"> My Comparing Weights </a></li>
+
+      </ul>
+    </div>
+
+    <div>
+      <div>
+        <div class="slidecontainer">
+          <input style="position: relative; left: 10%;" type="range" min="0" max="60" value="0" class="slider" id="myRange">
+          <p style="position: relative; left : 10%">Time = <span id="min"></span> : <span id="extraZ"></span><span id="sec"></span></p>
+        </div>
+
+        <div>
+          <canvas id="canvas" style="position: absolute; left: 25%; z-index: 0;"></canvas></canvas>
+          <canvas id="ncanvas" style="position: absolute; left: 25%; z-index: 1; background-color: rgba(0, 0, 200, 0)" ></canvas></canvas>
+        </div>
+      </div>
+      <div>
+        <button style="position: absolute; left: 10%" class="button" onclick="sTimer()">START</button>
+      </div>
+    </div>
+  </header>
+
+<script>
+  var canvas = document.getElementById("canvas");
+  canvas.width = 650;
+  canvas.height = 650;
+  var ncanvas = document.getElementById("ncanvas");
+  ncanvas.width = 650;
+  ncanvas.height = 650;
+
+  var ctx = canvas.getContext("2d");
+  var nctx = ncanvas.getContext("2d");
+
+  var radius = canvas.height / 2;
+  ctx.translate(radius, radius);
+  nctx.translate(radius, radius);
+
+  var pi = Math.PI;
+
+  ctx.beginPath();
+  ctx.arc(0, 0, radius * 0.05, 0, 2*Math.PI);
+  ctx.fillStyle = 'black';
+  ctx.fill();
+
+  ctx.font = radius * 0.15 + "px arial";
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "center";
+
+  var ang;
+  for(num = 0; num < 60; num+=5){
+  ang = num * Math.PI / 30;
+  ctx.rotate(-ang);
+  ctx.translate(0, -radius*0.85);
+  ctx.rotate(ang);
+  ctx.fillText(num.toString(), 0, 0);
+  ctx.rotate(-ang);
+  ctx.translate(0, radius*0.85);
+  ctx.rotate(ang);
+  }
+
+  for(num = 0; num < 60; num++){
+  ang = num * Math.PI / 30;
+  ctx.rotate(-ang);
+  ctx.translate(0, -radius*0.74);
+
+  ctx.lineWidth = 3;
+  ctx.moveTo(0, 0);
+  if (num % 5 == 0) {
+    ctx.lineTo(0, 40);
+    ctx.stroke();
+  } else {
+    ctx.lineTo(0, 20);
+    ctx.stroke();
+  }
+  ctx.translate(0, radius*0.74);
+  ctx.rotate(ang);
+  }
+
+  var slider = document.getElementById("myRange");
+  var output = document.getElementById("min");
+  output.innerHTML = slider.value;
+
+  var sec = document.getElementById("sec");
+  var z = document.getElementById("extraZ");
+  sec.innerHTML = 0;
+  z.innerHTML = "0";
+
+  slider.oninput = function() {
+    nctx.beginPath();
+    nctx.moveTo(0, 0);
+    nctx.clearRect(-ncanvas.width/2, -ncanvas.height/2, ncanvas.width, ncanvas.height);
+
+    nctx.arc(0, 0, radius * 0.65, pi  * 1.5 - (pi /30 * this.value), pi  * 1.5);
+    nctx.fillStyle = 'red';
+    nctx.fill();
+
+    output.innerHTML = this.value;
+  }
+
+  var x = 1;
+
+  function sTimer(){
+    var m = slider.value;
+    m *= 60;
+    var interval = setInterval(function(){
+
+      m -= 1;
+      if (m == -1) {
+        // alert("Finished!");
+        var alertWind = window.open("", "", "width=200, height=100");
+        alertWind.document.write("<h1><b>Time's Up!</b></h1>");
+        alertWind.focus();
+        clearInterval(interval);
+        m = 0;
+      }
+
+      nctx.beginPath();
+      nctx.moveTo(0, 0);
+      nctx.clearRect(-ncanvas.width/2, -ncanvas.height/2, ncanvas.width, ncanvas.height);
+      nctx.arc(0, 0, radius * 0.65, pi  * 1.5 - (pi /1800 * (m)), pi  * 1.5);
+      nctx.fillStyle = 'red';
+      nctx.fill();
+
+      sec.innerHTML -= 1;
+      if (sec.innerHTML == -1) {
+        if (m != 0) {
+          sec.innerHTML = 59;
+          slider.value -= 1;
+        } else {
+          sec.innerHTML = 0;
+        }
+      }
+      if (sec.innerHTML < 10) {
+        z.innerHTML = "0";
+      } else {
+        z.innerHTML = "";
+      }
+
+      output.innerHTML = slider.value;
+    }, 1000);
+  }
+</script>
+
+</body>
+</html>
