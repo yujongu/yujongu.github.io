@@ -121,3 +121,153 @@ h4{
   border: 10px;
   border-color: black;
 }
+
+
+/* compareWeight */
+.float-child {
+  width: 350px;
+  height: 80px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+
+
+.div2 {
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+
+}
+
+#drag1{
+  background-image: url("images/comparingWeightImages/1.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:70px;width:70px;
+}
+#drag2{
+  background-image: url("images/comparingWeightImages/2.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:70px;width:70px;
+}
+#drag3{
+  background-image: url("images/comparingWeightImages/3.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:70px;width:70px;
+}
+#drag4{
+  background-image: url("images/comparingWeightImages/4.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:70px;width:70px;
+}
+#drag5{
+  background-image: url("images/comparingWeightImages/5.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:70px;width:70px;
+}
+#drag6{
+  background-image: url("images/comparingWeightImages/6.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:70px;width:70px;
+}
+#drag7{
+  background-image: url("images/comparingWeightImages/white.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:70px;width:70px;
+}
+#drag8{
+  background-image: url("images/comparingWeightImages/white.png");
+  background-repeat:no-repeat;
+  background-size:contain;
+  height:70px;width:70px;
+}
+
+#div3 {
+  width: auto;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.flex-child {
+    flex: 1;
+    border: 2px;
+}
+
+.flex-child:first-child {
+    margin-right: 20px;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/* myTimeTimer */
+
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin: auto;
+    display: block;
+    
+}
+
+.slider {
+-webkit-appearance: none;
+width: 80%;
+height: 25px;
+background: #d3d3d3;
+outline: none;
+opacity: 0.7;
+-webkit-transition: .2s;
+transition: opacity .2s;
+}
+
+.slider:hover {
+opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 25px;
+height: 25px;
+background: #4CAF50;
+cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+width: 25px;
+height: 25px;
+background: #4CAF50;
+cursor: pointer;
+}
+
+.button{
+background-color: red;
+border: none;
+color: white;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
