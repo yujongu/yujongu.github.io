@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jong-U's Website</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+  </head>
+
+  <body>
+    <header>
+      <div class="row">
+        <div class="logo">
+          <img src="images/namelogo.png" alt="Cool Background Image">
+        </div>
+        <ul class="main-nav">
+          <li><a href="index.html"> Home </a></li>
+          <li><a href="aboutMe.html"> About me </a></li>
+          <li><a href="myTimeTimer.html"> My TimeTimer </a></li>
+          <li class="current"><a href="compareWeight.html"> My Comparing Weights </a></li>
+
+        </ul>
+      </div>
+
+
+      <div style="padding: 100px">
+        <label for="objcount">Choose the number of objects:</label>
+        <select onchange="genImages()" id="objcount">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6" selected>6</option>
+        </select>
+
+        <div>이동 횟수: <span id="count"></span></div>
+        <br>
+
+        <button onclick="checkAnswer()">Check Answer</button>
+        <br>
+        <br>
+
+        <button onclick="showAnswer()" id="btnShowAnswer">Show Answer</button>
+
+        <div class="flex-container">
+
+          <div class="flex-child">
+            <div class="div2" id="box7" >
+              <div id="drag7" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" width="70" height="70"></div>
+            </div>
+          </div>
+
+          <h2 class="flex-child" id="compSizeText"></h2>
+
+          <div class="flex-child">
+            <div class="div2" id="box8" >
+              <div id="drag8" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" width="70" height="70"></div>
+            </div>
+          </div>
+
+        </div>
+        <br>
+
+        <div class="flex-container" id="div3">
+          <p style="text-align: center">무거움</p>
+
+          <div class="div2" id="box1"  >
+            <div id="drag1" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" width="70" height="70"></div>
+          </div>
+
+          <div class="div2" id="box2"  >
+            <div id="drag2" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" width="70" height="70"></div>
+          </div>
+
+          <div class="div2" id="box3"  >
+            <div id="drag3" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" width="70" height="70"></div>
+          </div>
+
+          <div class="div2" id="box4" >
+            <div id="drag4" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" width="70" height="70"></div>
+          </div>
+
+          <div class="div2" id="box5" >
+            <div id="drag5" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" width="70" height="70"></div>
+          </div>
+
+          <div class="div2" id="box6" >
+            <div id="drag6" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event)" width="70" height="70"></div>
+          </div>
+
+          <p style="text-align: center">가벼움</p>
+        </div>
+
+        <p style="font-weight: bold;">답:  <span id="answer" style="visibility: hidden"></span></p>
+
+
+      </div>
+
+      <div id="footer">
+        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      </div>
+
+
+    </header>
+
+
+
+    <script>
+
+    var hashMap =
+    [["고양이", 9], ["병아리", 9],
+    ["닭", 9], ["개", 9],
+    ["물고기", 9], ["돼지", 9]];
+
+    var weights = new Array();
+    var item_counts = 6;
+    var checkCount = 0;
+    document.getElementById("count").innerHTML += checkCount;
+    for (var i = 0; i < item_counts; i++) {
+      weights[i] = i + 1;
+    }
+
+    var j, x, i;
+    for (i = weights.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = weights[i];
+        weights[i] = weights[j];
+        weights[j] = x;
+    }
+
+    for (var i = 0; i < weights.length; i++) {
+      hashMap[i][1] = weights[i];
+    }
+
+    hashMap.sort(function(a,b){
+        return a[1] - b[1];
+    });
+
+    document.getElementById("answer").innerHTML = "";
+
+    //가벼움 -> 무거움 답 프린트
+    // document.getElementById("answer").innerHTML += hashMap[0][0];
+    //
+    // for (var i = 1; i < weights.length; i++) {
+    //   document.getElementById("answer").innerHTML += ", " + hashMap[i][0];
+    // }
+
+    //무거움 -> 가벼움 답 프린트
+    for (var i = weights.length - 1; i >= 1; i--) {
+      document.getElementById("answer").innerHTML += hashMap[i][0] + ", ";
+    }
+
+    document.getElementById("answer").innerHTML += hashMap[0][0];
+
+
+
+    function genImages(){
+      document.getElementById("compSizeText").innerHTML = "";
+      checkCount = 0;
+      document.getElementById("count").innerHTML = "";
+
+      document.getElementById("count").innerHTML += checkCount;
+
+      item_counts = document.getElementById("objcount").selectedIndex + 2;
+
+      for (var i = 1; i < item_counts + 1; i++) {
+        var id = "box" + (i);
+        var imgId = "drag" + (i);
+        document.getElementById(id).children[0].id = imgId;
+
+
+        document.getElementById(imgId).style.visibility = "visible";
+
+      }
+      for (var i = item_counts + 1; i < 7; i++) {
+        var id = "box" + (i);
+        var imgId = "drag" + (i);
+        document.getElementById(id).children[0].id = imgId;
+
+        document.getElementById(imgId).style.visibility = "hidden";
+      }
+
+      document.getElementById("box7").children[0].id = "drag7";
+
+      document.getElementById("box8").children[0].id = "drag8";
+
+      weights = new Array();
+      for (var i = 0; i < item_counts; i++) {
+        weights[i] = i + 1;
+      }
+
+      var j, x, i;
+      for (i = weights.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+          x = weights[i];
+          weights[i] = weights[j];
+          weights[j] = x;
+      }
+
+
+      hashMap =
+      [["고양이", 9], ["병아리", 9],
+      ["닭", 9], ["개", 9],
+      ["물고기", 9], ["돼지", 9]];
+
+      for (var i = 0; i < weights.length; i++) {
+        hashMap[i][1] = weights[i];
+      }
+
+      hashMap.sort(function(a,b){
+          return a[1] - b[1];
+      });
+
+      document.getElementById("answer").innerHTML = "";
+
+      //가벼움 -> 무거움 답 프린트
+      // document.getElementById("answer").innerHTML += hashMap[0][0];
+      //
+      // for (var i = 1; i < weights.length; i++) {
+      //   document.getElementById("answer").innerHTML += ", " + hashMap[i][0];
+      // }
+
+      //무거움 -> 가벼움 답 프린트
+      for (var i = weights.length - 1; i >= 1; i--) {
+        document.getElementById("answer").innerHTML += hashMap[i][0] + ", ";
+      }
+
+      document.getElementById("answer").innerHTML += hashMap[0][0];
+    }
+
+    function compWeights(){
+      var ind1 = document.getElementById("box7").children[0].id.toString();
+      ind1 = ind1.replace(/drag/g, "");
+      var ind2 = document.getElementById("box8").children[0].id.toString();
+      ind2 = ind2.replace(/drag/g, "");
+      if (ind1 > 6 && ind2 > 6) {
+        ind1 = -1;
+        ind2 = -1;
+        document.getElementById("compSizeText").innerHTML = "";
+      } else if (ind1 > 6) {
+        ind1 = -1;
+        document.getElementById("compSizeText").innerHTML = "<";
+      } else if (ind2 > 6) {
+        ind2 = -1;
+        document.getElementById("compSizeText").innerHTML = ">";
+      } else {
+        if (weights[ind1 - 1] > weights[ind2 - 1]) {
+          document.getElementById("compSizeText").innerHTML = ">";
+        } else if (weights[ind1 - 1] < weights[ind2 - 1]) {
+          document.getElementById("compSizeText").innerHTML = "<";
+        }
+        checkCount++;
+        document.getElementById("count").innerHTML = checkCount;
+      }
+    }
+
+    function checkAnswer(){
+      var isCorrect = true;
+      for (var i = 0; i < weights.length; i++) {
+        var id = "box" + (i + 1);
+        var a = document.getElementById(id).children[0].id.toString();
+
+        a = a.replace(/drag/g, "");
+        //가벼움 -> 무거움
+        // if ((i + 1) != weights[a - 1]) {
+        //
+        //   isCorrect = false;
+        //   break;
+        // }
+
+        //무거움 -> 가벼움
+        if ((weights.length - i) != weights[a - 1]) {
+          isCorrect = false;
+          break;
+        }
+      }
+      if (isCorrect == false) {
+        alert("Wrong");
+      } else {
+        alert("Correct!");
+        // window.location.reload();
+      }
+    }
+
+    function showAnswer(){
+      if (document.getElementById("answer").style.visibility === "visible") {
+        document.getElementById("btnShowAnswer").innerHTML = "Show Answer";
+        document.getElementById("answer").style.visibility = "hidden";
+
+      } else{
+        document.getElementById("btnShowAnswer").innerHTML = "Hide Answer";
+        document.getElementById("answer").style.visibility = "visible";
+      }
+    }
+
+    function drag(dragEvent){
+      dragEvent.dataTransfer.setData("Id", dragEvent.target.id+"|"+dragEvent.target.parentNode.id);
+    }
+    function drop(dropEvent){
+      var dropData = dropEvent.dataTransfer.getData("Id");
+      dropItems = dropData.split("|");
+      var prevElem = document.getElementById(dropItems[1]);
+
+      prevElem.getElementsByTagName("div")[0].id = dropEvent.target.id;
+      dropEvent.target.id = dropItems[0];
+      dropEvent.preventDefault();
+
+      if (dropEvent.target.parentNode.id == "box7" || dropEvent.target.parentNode.id == "box8") {
+        compWeights();
+      } else if (dropItems[1] == "box7" || dropItems[1] == "box8") {
+        compWeights();
+      }
+    }
+
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+    </script>
+
+  </body>
+</html>
